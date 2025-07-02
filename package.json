@@ -1,0 +1,19 @@
+{
+  "name": "my-quotes-col",
+  "version": "1.0.0",
+  "description": "Collection of quotes",
+  "main": "index.js",
+  "scripts": {
+    "startdev":"nodemon server.js"
+  },
+  "author": "Rome",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0",
+    "mongoose": "^8.16.1"
+  },
+  "devDependencies": {
+    "dotenv": "^17.0.1",
+    "nodemon": "^3.1.10"
+  }
+}
