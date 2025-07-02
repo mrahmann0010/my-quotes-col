@@ -1,19 +1,22 @@
-const express = require('express');
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+const app = require('./app');
 
 // Loading environment variables
-// dotenv.config();
+dotenv.config({path:'./config.env'});
 
-const app = express();
+// DB
+const DB = (process.env.DATABASE_URL.replace('<db_password>', process.env.DATABASE_PASS));
 
-// Using Middleware
-app.use(express.json());
+mongoose.connect(DB, {
+    useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(()=>console.log('Database Connected!'))
+.catch((err)=>console.error('MongoDB connection Error', err));
 
 
 
-
-const PORT = 8000;
-
-app.listen(PORT, ()=>{
-    console.log(`App running on PORT ${PORT}`);
+app.listen(process.env.PORT, ()=>{
+    console.log(`App running on PORT ${process.env.PORT}`);
 });
