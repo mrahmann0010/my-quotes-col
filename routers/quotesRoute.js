@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-router.route('/', (req, res)=> {
+router.get('/', (req, res, next)=> {
     res.json({quotes})
 })
 
-router.route('/:id', (req, res)=>{
+const quotes = [{name:'Robert', quote:'Future is dangerous'}];
+router.get('/:id', (req, res, next)=>{
     const quoteId = parseInt(req.params.id);
     const quote = quotes.find(q => q.id === quoteId);
 
@@ -16,3 +17,5 @@ router.route('/:id', (req, res)=>{
     res.status(200).json({quote})
 
 });
+
+module.exports = router;

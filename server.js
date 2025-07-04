@@ -15,23 +15,23 @@ mongoose.connect(DB, {
 .then(()=>console.log('Database Connected!'))
 .catch((err)=>console.error('MongoDB connection Error', err));
 
-const quotesSchema = new mongoose.Schema({
-  quote:{
-    type:String,
-    required:[true, 'Must have a quote body'],
-    unique:true,
-  }
-});
+// const quotesSchema = new mongoose.Schema({
+//   quote:{
+//     type:String,
+//     required:[true, 'Must have a quote body'],
+//     unique:true,
+//   }
+// });
 
-const Quote = mongoose.model('Quote', quotesSchema);
+// const Quote = mongoose.model('Quote', quotesSchema);
 
-const testQuote = new Quote({
-  quote:"Far from the Madding Crowd"
-});
+// const testQuote = new Quote({
+//   quote:"Far from the Madding Crowd"
+// });
 
-testQuote.save()
-.then((doc)=> console.log(doc))
-.catch((err)=> console.log("Error :", err));
+// testQuote.save()
+// .then((doc)=> console.log(doc))
+// .catch((err)=> console.log("Error :", err));
 
 
 app.listen(process.env.PORT, ()=>{
