@@ -1,19 +1,15 @@
-const path = require('path');
 const express = require('express');
 const app = express();
 
-const publicDirectory = path.join(__dirname, './public');
-// Using Middleware
-// app.use(express.json());
-app.use(express.static(publicDirectory));
+// 1) Middleware
+app.use(express.json());
+
+// 2) Routes
+
+app.use('/api/v1/quotes', quotesController);
+app.use('/api/v1/authors', authorController);
 
 
-app.get('/quotes', (req, res)=>{
-    res.send({
-        name:'Jibananda',
-        quote:'Life is difficult'
-    });
-});
 
 
 module.exports = app;
