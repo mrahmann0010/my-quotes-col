@@ -24,7 +24,7 @@ exports.getASingleAuthor = async (req, res, next) =>{
         const authorName = req.params.author;
         const author = await Authors.findOne({authorId:authorName});
         if(!author) {
-            res.status(400).json({
+            return res.status(400).json({
                 status:'fail',
                 message:'Author cannot be found by ID',
             });
@@ -60,5 +60,23 @@ exports.createAuthor = async (req, res, next) =>{
             err:error.message,
         });
         
+    };
+};
+
+exports.deleteAuthor = async (req, res, next) => {
+    try {
+        const authorId = req.params.id;
+        await Authors.findByIdAndDelete(authorId);
+
+        res.status(204).json({
+            status:'success',
+            message:'Author Deleted Successfully',
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            status:'fail',
+            message:error.message,
+        });
     };
 };

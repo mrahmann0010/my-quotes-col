@@ -8,5 +8,6 @@ router.get('/', quotesController.getAllQuotes);
 router.get('/:author', quotesController.getASingleQuote);
 
 router.post('/', quotesController.createQuote);
+router.delete('/:id', quotesController.deleteQuote);
 
 module.exports = router;

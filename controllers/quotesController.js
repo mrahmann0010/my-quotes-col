@@ -24,7 +24,7 @@ exports.getASingleQuote = async (req, res, next) =>{
         const authorName = req.params.author;
         const quote = await Quotes.findOne({authorId:authorName});
         if(!quote) {
-            res.status(400).json({
+            return res.status(400).json({
                 status:'fail',
                 message:'Quote cannot be found by Author',
             });
@@ -62,3 +62,45 @@ exports.createQuote = async (req, res, next) =>{
         
     };
 };
+
+exports.deleteQuote = async (req, res, next) => {
+    try {
+        const quoteId = req.params.id;
+        await Quotes.findByIdAndDelete(quoteId);
+
+        res.status(204).json({
+            status:'success',
+            message:'Quote Deleted Successfully',
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            status:'fail',
+            message:error.message,
+        });
+    };
+};
+
+// exports.getQuoteById = async (req, res, next) =>{
+//     try {
+//         const quoteId = req.params.id;
+//         const quote = await Quotes.findById(quoteId);
+//         if(!quote) {
+//             return res.status(400).json({
+//                 status:'fail',
+//                 message:'Quote cannot be found By ID 🆔',
+//             });
+//         }
+//         res.status(200).json({
+//             status:'success',
+//             data:{
+//                 quote
+//             }
+//         });
+//     } catch (error) {
+//         res.status(500).json({
+//             status:'fail',
+//             message:error.message,
+//         });
+//     };
+// };

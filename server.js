@@ -7,6 +7,7 @@ dotenv.config({path:'./config.env'});
 
 // DB
 const DB = (process.env.DATABASE_URL.replace('<db_password>', process.env.DATABASE_PASS));
+console.log(DB);
 
 mongoose.connect(DB, {
     useNewUrlParser: true,
