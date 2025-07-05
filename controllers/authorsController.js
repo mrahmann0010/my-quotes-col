@@ -1,38 +1,38 @@
-const Quotes = require('../models/quotesModel');
+const Authors = require('../models/authorsModels');
 
-exports.getAllQuotes = async (req, res, next) => {
+exports.getAllAuthors = async (req, res, next) => {
     try {
-        const quotes = await Quotes.find();
+        const authors = await Authors.find();
         res.status(200).json({
             status:'success',
-            results:quotes.length,
+            results:authors.length,
             data:{
-                quotes,
+                authors,
             }
         });
 
     } catch (error) {
         res.status(500).json({
             status:'fail',
-            message:'Cannot get Quotes',
+            message:'Cannot get Authors',
         }); 
     };
 };
 
-exports.getASingleQuote = async (req, res, next) =>{
+exports.getASingleAuthor = async (req, res, next) =>{
     try {
         const authorName = req.params.author;
-        const quote = await Quotes.findOne({authorId:authorName});
-        if(!quote) {
+        const author = await Authors.findOne({authorId:authorName});
+        if(!author) {
             res.status(400).json({
                 status:'fail',
-                message:'Quote cannot be found by Author',
+                message:'Author cannot be found by ID',
             });
         }
         res.status(200).json({
             status:'success',
             data:{
-                quote
+                author
             }
         });
     } catch (error) {
@@ -43,20 +43,20 @@ exports.getASingleQuote = async (req, res, next) =>{
     };
 };
 
-exports.createQuote = async (req, res, next) =>{
+exports.createAuthor = async (req, res, next) =>{
     try {
-        const newQuote = await Quotes.create(req.body);
+        const newAuthor = await Authors.create(req.body);
         res.status(201).json({
             status:'succes',
-            message:'Quote successfully Created',
+            message:'Author successfully Created',
             data:{
-                quote: newQuote,
+                author: newAuthor,
             }
         })
     } catch (error) {
         res.status(400).json({
             status:'fail',
-            message:'Quote cannot be created!',
+            message:'Author cannot be created!',
             err:error.message,
         });
         
