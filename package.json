@@ -4,11 +4,12 @@
   "description": "Collection of quotes",
   "main": "index.js",
   "scripts": {
-    "dev":"nodemon server.js"
+    "dev": "nodemon server.js"
   },
   "author": "Rome",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^2.2.0",
     "express": "^5.1.0",
     "mongoose": "^8.16.1"
   },

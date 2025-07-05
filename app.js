@@ -1,10 +1,13 @@
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
+
 const quotesRouter = require('./routers/quotes');
 const authorsRouter = require('./routers/authors');
 
 // 1) Middleware
 app.use(express.json());
+// app.use(bodyParser.urlencoded({extended:false}));
 
 // 2) Adding Routes
 app.use('/api/v1/quotes', quotesRouter);
