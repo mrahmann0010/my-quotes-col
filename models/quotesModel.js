@@ -1,23 +1,44 @@
 const mongoose = require('mongoose');
 
-const quotesSchema = new mongoose.Schema({
-    quote:{
-        type:String,
-        required:[true, 'Entry must contain a quote'],
-        unique:true,
-    },
-    author:{
-        type:String,
-        required:[true, 'A quote must have an author']
-    },
-
-    authorId:{
-        type:String,
-        required:[true, 'A quote must have an author'],
-    }
-
+const quoteSchema = new mongoose.Schema({
+  quote: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  authorID: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  author: {
+  type: mongoose.Schema.Types.ObjectId,
+  ref: 'Authors',
+  required: true
+  },
+  authorName: {
+  type: String,
+  required: true,
+  trim:true,
+  },
+  source: {
+    type: String,
+    default: '',
+    trim: true,
+  },
+  tags: {
+    type: [String],
+    default: [],
+  },
+  likes: {
+    type: Number,
+    default: 0,
+    min: 0,
+  }
+}, {
+  timestamps: true  // Automatically adds createdAt and updatedAt
 });
 
-const Quotes = mongoose.model('Quote', quotesSchema);
+const Quotes = mongoose.model('Quotes', quoteSchema);
 
 module.exports = Quotes;
