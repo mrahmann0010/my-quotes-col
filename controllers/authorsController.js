@@ -63,6 +63,38 @@ exports.createAuthor = async (req, res, next) =>{
     };
 };
 
+// Works and Updates, but does not return the updated Author
+
+exports.updateAnAuthor = async (req, res, next)=>{
+    const prevauthorID = req.params.authorID;
+    const {newAuthorID} = req.body;
+    try {
+    const updatedAuthor = await Authors.findOneAndUpdate(
+        {authorID:prevauthorID},
+        {authorID: newAuthorID},
+        {new:true},
+    )
+
+    if (!updatedAuthor) return res.status(404).send('Author not found');
+
+    res.status(204).json({
+        status:'success',
+        data:{
+            updatedAuthor
+        }
+    });
+
+    // Updates, but not returns
+
+
+    } catch (error) {
+        res.status(500).send(err.message);
+        console.log("Error with Updating");  
+
+    }
+}
+
+
 exports.deleteAuthor = async (req, res, next) => {
     try {
         const authorId = req.params.id;

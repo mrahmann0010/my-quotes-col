@@ -9,7 +9,7 @@ const rawQuotes = require('../data/rawQuotes');
 dotenv.config({path:'./config.env'});
 
 
-const authorFilterName = 'buddhodeb';
+const authorFilterName = 'buddhabose';
 const DB = (process.env.DATABASE_URL.replace('<db_password>', process.env.DATABASE_PASS));
 
 mongoose.connect(DB, {
