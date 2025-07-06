@@ -2,12 +2,20 @@ const express = require('express');
 const router = express.Router();
 const quotesController = require('../controllers/quotesController');
 
-const quotes = [{quote:'We all live here', id:'1'}, {quote:'I love you', id:'2'}];
 
+// Get All Quotes
 router.get('/', quotesController.getAllQuotes);
-router.get('/:author', quotesController.getASingleQuote);
 
+// Get A Quote by QuoteID
+router.get('/quotebyid/:id', quotesController.getASingleQuote);
+
+// Get All Quotes of an Author by AuthorID
+router.get('/byauthor/:authorID', quotesController.getAllQuotesByAnAuthorID);
+
+// Create a Quote
 router.post('/', quotesController.createQuote);
+
+// Delete a Quote by ID
 router.delete('/:id', quotesController.deleteQuote);
 
 module.exports = router;

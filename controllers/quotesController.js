@@ -21,12 +21,12 @@ exports.getAllQuotes = async (req, res, next) => {
 
 exports.getASingleQuote = async (req, res, next) =>{
     try {
-        const authorName = req.params.author;
-        const quote = await Quotes.findOne({authorId:authorName});
+        const quoteId = req.params.id;
+        const quote = await Quotes.findById(quoteId);
         if(!quote) {
             return res.status(400).json({
                 status:'fail',
-                message:'Quote cannot be found by Author',
+                message:'Quote cannot be found by ID',
             });
         }
         res.status(200).json({
@@ -42,6 +42,31 @@ exports.getASingleQuote = async (req, res, next) =>{
         });
     };
 };
+
+exports.getAllQuotesByAnAuthorID = async (req, res, next)=>{
+    const authorID = req.params.authorID;
+    try {
+        const quotesByAuthor = await Quotes.find({authorID:authorID});
+        if(!quotesByAuthor.length) {
+            return res.status(404).json({
+                status:'fail',
+                message:'Cannot find Quotes by AuthorID',
+            })
+        }
+        res.status(200).json({
+            status:'success',
+            result:quotesByAuthor.length,
+            data:{
+                quotesByAuthor
+            }
+        })
+    } catch (error) {
+        res.status(500).json({
+            status:'fail',
+            message:error.message,
+        })
+    }
+}
 
 exports.createQuote = async (req, res, next) =>{
     try {

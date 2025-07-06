@@ -1,4 +1,4 @@
-const Authors = require('../models/authorsModels');
+const Authors = require('../models/authorsModel');
 
 exports.getAllAuthors = async (req, res, next) => {
     try {
@@ -21,8 +21,8 @@ exports.getAllAuthors = async (req, res, next) => {
 
 exports.getASingleAuthor = async (req, res, next) =>{
     try {
-        const authorName = req.params.author;
-        const author = await Authors.findOne({authorId:authorName});
+        const authorId = req.params.authorID;
+        const author = await Authors.findOne({ authorID: authorId });
         if(!author) {
             return res.status(400).json({
                 status:'fail',
