@@ -5,9 +5,10 @@ const app = require('./app');
 // Loading environment variables
 dotenv.config({path:'./config.env'});
 
+const PORT = process.env.PORT || 8080;
+
 // DB
 const DB = (process.env.DATABASE_URL.replace('<db_password>', process.env.DATABASE_PASS));
-console.log(DB);
 
 mongoose.connect(DB, {
     useNewUrlParser: true,
