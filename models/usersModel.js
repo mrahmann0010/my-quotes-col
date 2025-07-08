@@ -46,6 +46,10 @@ const userSchema = new mongoose.Schema({
         enum:['Reader', 'Admin', 'Moderator'],
         default:'Reader',
     },
+    passwordChangedAt:{
+        type:Date,
+    }
+
 }, { timestamps: true });
 
 userSchema.pre('save',async function (next){
@@ -62,6 +66,17 @@ userSchema.pre('save',async function (next){
 userSchema.methods.comparePassword = async function (candidatePassowrd, userPassword) {
     return await bcrypt.compare(candidatePassowrd, userPassword);
 };
+
+// Check if user has changed Password
+userSchema.methods.isPasswordChanged = function (jwtTimestamp) {
+    if(this.passwordChangedAt){
+        const passwordChangedTime = parseInt(this.passwordChangedAt.getTime()/1000, 10);
+        // console.log('Logging from here:', passwordChangedTime, jwtTimestamp);
+        return jwtTimestamp < passwordChangedTime;
+    }
+    
+    return false;
+}
 
 const User = mongoose.model('User', userSchema);
 

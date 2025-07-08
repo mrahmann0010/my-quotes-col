@@ -1,7 +1,8 @@
 const Quotes = require('../models/quotesModel');
+const CustomError = require('../utilities/CustomError');
+const asyncHandler = require('../utilities/asyncHandler');
 
-exports.getAllQuotes = async (req, res, next) => {
-    try {
+exports.getAllQuotes = asyncHandler( async (req, res, next) => {
         const quotes = await Quotes.find();
         res.status(200).json({
             status:'success',
@@ -10,24 +11,14 @@ exports.getAllQuotes = async (req, res, next) => {
                 quotes,
             }
         });
+});
 
-    } catch (error) {
-        res.status(500).json({
-            status:'fail',
-            message:'Cannot get Quotes',
-        }); 
-    };
-};
-
-exports.getASingleQuote = async (req, res, next) =>{
-    try {
+exports.getASingleQuote = asyncHandler (async (req, res, next) =>{
         const quoteId = req.params.id;
         const quote = await Quotes.findById(quoteId);
         if(!quote) {
-            return res.status(400).json({
-                status:'fail',
-                message:'Quote cannot be found by ID',
-            });
+            const error = new CustomError(`Quote cannot be found by ID`, 404)
+            return next(error);
         }
         res.status(200).json({
             status:'success',
@@ -35,23 +26,14 @@ exports.getASingleQuote = async (req, res, next) =>{
                 quote
             }
         });
-    } catch (error) {
-        res.status(500).json({
-            status:'fail',
-            message:error.message,
-        });
-    };
-};
+});
 
-exports.getAllQuotesByAnAuthorID = async (req, res, next)=>{
+exports.getAllQuotesByAnAuthorID = asyncHandler (async (req, res, next)=>{
     const authorID = req.params.authorID;
-    try {
         const quotesByAuthor = await Quotes.find({authorID:authorID});
         if(!quotesByAuthor.length) {
-            return res.status(404).json({
-                status:'fail',
-                message:'Cannot find Quotes by AuthorID',
-            })
+            const error = new CustomError(`Quote cannot be found by AuthorID`, 404)
+            return next(error);
         }
         res.status(200).json({
             status:'success',
@@ -60,16 +42,9 @@ exports.getAllQuotesByAnAuthorID = async (req, res, next)=>{
                 quotesByAuthor
             }
         })
-    } catch (error) {
-        res.status(500).json({
-            status:'fail',
-            message:error.message,
-        })
-    }
-}
+});
 
-exports.createQuote = async (req, res, next) =>{
-    try {
+exports.createQuote = asyncHandler(async (req, res, next) =>{
         const newQuote = await Quotes.create(req.body);
         res.status(201).json({
             status:'succes',
@@ -78,18 +53,9 @@ exports.createQuote = async (req, res, next) =>{
                 quote: newQuote,
             }
         })
-    } catch (error) {
-        res.status(400).json({
-            status:'fail',
-            message:'Quote cannot be created!',
-            err:error.message,
-        });
-        
-    };
-};
+});
 
-exports.deleteQuote = async (req, res, next) => {
-    try {
+exports.deleteQuote = asyncHandler (async (req, res, next) => {
         const quoteId = req.params.id;
         await Quotes.findByIdAndDelete(quoteId);
 
@@ -97,14 +63,7 @@ exports.deleteQuote = async (req, res, next) => {
             status:'success',
             message:'Quote Deleted Successfully',
         });
-
-    } catch (error) {
-        res.status(500).json({
-            status:'fail',
-            message:error.message,
-        });
-    };
-};
+});
 
 // exports.getQuoteById = async (req, res, next) =>{
 //     try {

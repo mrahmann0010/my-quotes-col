@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const quotesController = require('../controllers/quotesController');
+const authController = require('../controllers/usersController');
 
 
 // Get All Quotes
-router.get('/', quotesController.getAllQuotes);
+router.get('/', authController.protect, quotesController.getAllQuotes);
 
 // Get A Quote by QuoteID
 router.get('/quotebyid/:id', quotesController.getASingleQuote);
