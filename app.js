@@ -1,6 +1,5 @@
 const express = require('express');
-const app = express();
-const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const quotesRouter = require('./routers/quotes');
 const authorsRouter = require('./routers/authors');
@@ -8,9 +7,15 @@ const usersRouter = require('./routers/users');
 const globalErrorHandler = require('./controllers/errorHandler');
 const CustomError = require('./utilities/CustomError');
 
+const app = express();
 // 1) Middleware
 app.use(express.json());
-// app.use(bodyParser.urlencoded({extended:false}));
+
+// For Front-end Connections
+app.use(cors({
+  origin: 'http://localhost:3000', // allow React dev server
+  methods: ['GET', 'POST'],
+}));
 
 // 2) Adding Routes
 app.use('/api/v1/quotes', quotesRouter);
