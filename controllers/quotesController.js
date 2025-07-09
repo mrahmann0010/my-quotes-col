@@ -3,7 +3,8 @@ const CustomError = require('../utilities/CustomError');
 const asyncHandler = require('../utilities/asyncHandler');
 
 exports.getAllQuotes = asyncHandler( async (req, res, next) => {
-        const quotes = await Quotes.find();
+        const quotes = await Quotes.find(req.query);
+        console.log(req.query)
         res.status(200).json({
             status:'success',
             results:quotes.length,
@@ -64,6 +65,24 @@ exports.deleteQuote = asyncHandler (async (req, res, next) => {
             message:'Quote Deleted Successfully',
         });
 });
+
+exports.getARandomQuote = asyncHandler ( async (req, res, next)=>{
+    const [randomQuote] = await Quotes.aggregate([{$sample:{size:1}}]);
+    if(!randomQuote) {
+        const error = new CustomError('Quote generation failed', 404);
+        return next(error);
+    }
+    res.status(200).json({
+        status:'success',
+        data:{
+            quote:randomQuote,
+        }
+    });
+});
+
+
+
+
 
 // exports.getQuoteById = async (req, res, next) =>{
 //     try {

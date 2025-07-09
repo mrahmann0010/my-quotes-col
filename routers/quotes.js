@@ -13,6 +13,9 @@ router.get('/quotebyid/:id', quotesController.getASingleQuote);
 // Get All Quotes of an Author by AuthorID
 router.get('/byauthor/:authorID', quotesController.getAllQuotesByAnAuthorID);
 
+// Get A Random Quote
+router.get('/randomquote', quotesController.getARandomQuote);
+
 // Create a Quote
 router.post('/', quotesController.createQuote);
 
