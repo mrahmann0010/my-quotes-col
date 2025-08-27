@@ -4,6 +4,7 @@ const cors = require('cors');
 const quotesRouter = require('./routers/quotes');
 const authorsRouter = require('./routers/authors');
 const usersRouter = require('./routers/users');
+const quotesByOtherRouter = require('./routers/quotesByOther');
 const globalErrorHandler = require('./controllers/errorHandler');
 const CustomError = require('./utilities/CustomError');
 
@@ -20,6 +21,9 @@ app.use(cors({
 // 2) Adding Routes
 app.use('/api/v1/quotes', quotesRouter);
 app.use('/api/v1/authors', authorsRouter);
+
+// QuotesByOther -- except admin, this router will be used to store quotes uploaded by Friends.
+app.use('/api/v1/quotesbyother', quotesByOtherRouter);
 
 app.use('/api/v1/users', usersRouter);
 
