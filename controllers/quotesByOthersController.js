@@ -19,7 +19,7 @@ exports.getQuotesByUploaderName = asyncHandler( async(req, res, next)=> {
     }
 
     res.json(quotesByUploader);
-})
+});
 
 
 
@@ -34,4 +34,3 @@ exports.createQuoteByUploaderName = asyncHandler( async(req, res, next)=> {
         }
     });
 });
-

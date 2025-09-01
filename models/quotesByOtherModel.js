@@ -9,7 +9,7 @@ const quotesByOtherSchema = new mongoose.Schema({
   },
   authorName: {
     type: String,
-    required: true,
+    // required: true,
     trim: true,
   },
   uploadedBy: {
@@ -22,6 +22,19 @@ const quotesByOtherSchema = new mongoose.Schema({
     type: [String],
     default: [],
   },
+
+  // Added to new DB Model to complete it
+  language: {
+    type: String,
+    enum: ['english', 'bangla'],
+    required: true,
+  },
+  source: {
+    type:String,
+    trim:true,
+    default:'',
+  },
+
 }, {
   timestamps: true  // ✅ adds createdAt and updatedAt
 });
