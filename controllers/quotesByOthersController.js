@@ -25,6 +25,15 @@ exports.getQuotesByUploaderName = asyncHandler( async(req, res, next)=> {
 
 // Create a new Quote
 exports.createQuoteByUploaderName = asyncHandler( async(req, res, next)=> {
+    // Checking for required fields
+    const { quote, uploadedBy, language } = req.body;
+    if(!quote || !uploadedBy || !language) {
+        return res.status(400).json({
+            status:'fail',
+            message:'Please fill in all the required fields'
+        });
+    }
+    
     const newQuote = await QuotesByOther.create(req.body);
     res.status(201).json({
         status:'success',
