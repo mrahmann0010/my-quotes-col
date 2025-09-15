@@ -12,11 +12,17 @@ const quotesByOtherSchema = new mongoose.Schema({
     // required: true,
     trim: true,
   },
+  // Old String -> Prev Implementation
   uploadedBy: {
     type: String,
     required: true,
     trim: true,
     set: (val) => val.toLowerCase(), // Store Uploader Name in Lowercase
+  },
+  // New String -> New Implementation -- Better way to Keep track of uploader
+  uploader:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:'Uploader',   // Each quote is linked with an object from Uploader Collection
   },
   tags: {
     type: [String],

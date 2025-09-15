@@ -8,8 +8,11 @@ router.get('/uploader/:uploaderName', quotesByOtherController.getQuotesByUploade
 // Create a Quote by Uploader Name
 router.post('/', quotesByOtherController.createQuoteByUploaderName);
 
-// Get All uploaders
+
+// Get All uploaders -> Modified Version
 router.get('/uploaders', quotesByOtherController.getAllUploaders);
 
+// Create a Uploader
+router.post('/uploaders', quotesByOtherController.createUploader);
 
 module.exports = router;
