@@ -1,110 +1,53 @@
 const rawQuotes = [
   {
-    quote: "No, this is my revenge. I am giving you just what you want, I'm releasing you. And yet I''m really not. I'll inflict torments on you, subtle torments, day after day, year after year- that's why you're necessary to me.",
-    author: "Buddhadeva Bose",
-    source: "It Rained All Night",
-    tags: ["revenge", "relationships", "torment"],
+    quote: "চিত্তরঞ্জন দাশের যখন মৃত্যু হলো তখনই বাংলার রাজনীতি শেষ হয়ে গেল। বাংলার রাজনীতি তখন ভারতীয় রাজনীতির অংশ হয়ে গেল। এই ইতিহাস আমাদের লক্ষ্য করতে হবে যে, বাংলার রাজনীতিকে আমরা বাঙালিরা যদি স্বতন্ত্রভাবে রাখতে পারতাম, যদি সর্বভারতীয় কংগ্রেস বা সর্বভারতীয় মুসলিম লীগের হাতে ছেড়ে না দিতাম তাহলে এ অঞ্চলের ইতিহাস অন্যরকম হতো।",
+    author: "Unknown",
+    source: "bn.wikiquote.org",
+    tags: ["রাজনীতি", "বাংলা", "ইতিহাস"],
     likes: 0
   },
   {
-    quote: "স্মৃতি থাকে। শেষ পর্যন্ত শুধু স্মৃতিই থাকে, আর কিছুই থাকে না।",
-    author: "বুদ্ধদেব বসু",
-    source: "মনের মত মেয়ে",
-    tags: ["স্মৃতি", "অন্তিম সত্য", "বাংলা সাহিত্য"],
+    quote: "ব্যক্তিগত ও পারিবারিক ব্যাপারে আমরা যেভাবে সমস্যার সমাধান করি, কূটনৈতিক ক্ষেত্রে সেই পন্থা অবলম্বন করলে তা অনেকাংশেই সহজ হয়ে যায়।",
+    author: "Unknown",
+    source: "bn.wikiquote.org",
+    tags: ["কূটনীতি", "সমাধান", "দূরদর্শিতা"],
     likes: 0
   },
   {
-    quote: "Hatred is never ended by hatred but by love.",
-    author: "Buddhadeva Bose",
-    source: "",
-    tags: ["love", "hatred", "wisdom"],
+    quote: "পূর্ব পাকিস্তানের সাহিত্য পূর্ব পাকিস্তানিদের ভাষায়ই রচিত হবে। এই ভাষা সংস্কৃত ব্যাকরণ কিংবা তথাকথিত বাংলা ব্যাকরণের প্রতি কোনো শ্রদ্ধা দেখাবে না।",
+    author: "Unknown",
+    source: "bn.wikiquote.org",
+    tags: ["সাহিত্য", "ভাষা", "সংস্কৃতি"],
     likes: 0
   },
   {
-    quote: "ভালোবাসার মত সুন্দর আর-কিছুই নয়, আর ভালোবাসা জানাতে যত ভালো লাগে, তত ভালো আর-কিছুই লাগে না।",
-    author: "Buddhadeva Bose",
-    source: "কালের পুতুল",
-    tags: ["ভালোবাসা", "রোমান্স", "বাংলা সাহিত্য"],
+    quote: "সাধারণ রাষ্ট্রনায়কদের ব্যক্তিত্ব স্টেটসম্যানদের ব্যক্তিত্বের সঙ্গে তেমন মেলেনা। অসাধারণ ব্যক্তিত্ববান রাষ্ট্রনায়কদেরা প্রায়ই সহকর্মী ও অনুসারীদের ব্যক্তিত্ব সংকুচিত করে দেয়, অধিকাংশ ক্ষেত্রেই তাদেরকে সম্পূর্ণরূপে ব্যক্তিত্বহীন করে ফেলে; নেতার অপরাধ শুধু এইটুকু যে তিনি এতে বাধা দেন না, বরং কাজে-কর্মে সমর্থন করেন।",
+    author: "Unknown",
+    source: "ebanglalibrary.com",
+    tags: ["রাষ্ট্রনায়ক", "ব্যক্তিত্ব", "নেতৃত্ব"],
     likes: 0
   },
   {
-    quote: "I will not forgive. I will inflict and invite suffering—all our lives. As Bunni grows up she'll hear from her mother that her father is cruel, capricious, tyrannical person. Bunni won't love me. Everyone will take her side, because she is a woman, I won't be able to say a thing, ever. I will have to keep my mouth shut my entire life. I must maintain my wife's honour. And we call women the weaker sex! How deadly is the strength of frailty, and men—if they're gentlemen—how incredibly helpless!",
-    author: "Buddhadeva Bose",
-    source: "It Rained All Night",
-    tags: ["gender", "suffering", "relationships"],
+    quote: "এই ধরনের ডিক্টেটরদের কেউ কেউ দেশ ও জাতির অর্থনৈতিক ও অন্যবিধ উপকার করিয়াছেন, এটা সত্য হইলেও এ কথাও সমানভাবে সত্য যে এঁরা দেশ ও জাতির আত্মমর্যাদাবোধ ঘোরতরভাবে ক্ষুণ্ণ করিয়াছেন। এর কারণ এই যে এঁদের শাসন-আমলে নাগরিকদের ব্যক্তিত্ব স্ফুরণ সাধারণভাবে বাধাপ্রাপ্ত হইয়াছে। ফলে অর্থনীতি ও শিল্প-বিজ্ঞানের দিকের উন্নতির চেয়ে আত্মিক দিকের ক্ষতির পরিমাণ অনেক বেশি হইয়াছে।",
+    author: "Unknown",
+    source: "ebanglalibrary.com",
+    tags: ["ডিক্টেটর", "অর্থনীতি", "ব্যক্তিত্ব"],
     likes: 0
   },
   {
-    quote: "No time for happiness, no time for sorrow. Work is the best of physicians.",
-    author: "Buddhadeva Bose",
-    source: "",
-    tags: ["work", "emotion", "life"],
+    quote: "তাই এই সিদ্ধান্তে আসিতে হয়, ব্যক্তিত্ব ব্যক্তির স্বকীয়তা, তার নিজেরই ব্যাপার। ঘুরিয়া-ফিরিয়া সেই গোড়ার কথায়, জন্মের কথায়, বাপ-মার কথায় আসিতে হয়।",
+    author: "Unknown",
+    source: "ebanglalibrary.com",
+    tags: ["ব্যক্তিত্ব", "স্বকীয়তা", "জীবন"],
     likes: 0
   },
   {
-    quote: "কিন্তু নেশার হাত থেকে মুক্তি নেই। মানুষের মুখ আমাকে দেখতেই হবে, আমাকে শুনতেই হবে মানুষের কথা... নয়তো তুমি বাঁচতে পারবে না।",
-    author: "বুদ্ধদেব বসু",
-    source: "রূপালি পাখি",
-    tags: ["নেশা", "মানবিকতা", "বাংলা উপন্যাস"],
-    likes: 0
-  },
-  {
-    quote: "Love story? When it's as cold as this? Fine, all right.",
-    author: "Buddhadeva Bose",
-    source: "My Kind of Girl",
-    tags: ["love", "irony", "short fiction"],
-    likes: 0
-  },
-  {
-    quote: "পৃথিবীতে আগে কখনো ছিলো না এমন জিনিশ যন্ত্র ছাড়া কিছু নেই, জৈব পদার্থ মাত্রেরই পূর্ব-ইতিহাস আছে, আর সেই ইতিহাস তার নূতনত্বের অন্তরায় নয়, বরং উপায়।",
-    author: "Buddhadeb Bosu",
-    source: "রবীন্দ্রনাথ : কথাসাহিত্য",
-    tags: ["ইতিহাস", "বিজ্ঞান", "রবীন্দ্র-সমালোচনা"],
-    likes: 0
-  },
-  {
-    quote: "সমস্যা' যত সহজে সেকেলে হয়ে যায় এমন আর কিছুই নয়, শুধু সমসাময়িক সমস্যার উপরে যে রচনায় নির্ভর, তার আশু মৃত্যুদণ্ড লেখক নিজে উচ্চারণ করেছেন।",
-    author: "Buddhadeb Bosu",
-    source: "রবীন্দ্রনাথ : কথাসাহিত্য",
-    tags: ["সমসাময়িকতা", "সাহিত্য", "দৃষ্টিভঙ্গি"],
-    likes: 0
-  },
-  {
-    quote: "ছন্দে বেঁধে দিলেই একটি কথা ফুরিয়েও ফুরোয় না; যে কথা অতি সাধারণ একটা খবরমাত্র, তা হয়ে ওঠে বাণী।",
-    author: "Buddhadeb Bosu",
-    source: "রবীন্দ্রনাথ : কথাসাহিত্য",
-    tags: ["কবিতা", "ছন্দ", "সাহিত্য"],
-    likes: 0
-  },
-  {
-    quote: "সুকুমার রায়কে 'হাসির কবিতা'র গণ্ডির মধ্যে ধরে রাখা যায় না... তাঁকে কবি বলে না-মানতে হলে 'কবি' কথাটায় অন্যায়ভাবে সীমানা টানতে হয়।",
-    author: "Buddhadeva Bose",
-    source: "সাহিত্যচর্চা",
-    tags: ["সুকুমার রায়", "সাহিত্যসমালোচনা", "বাংলা সাহিত্য"],
-    likes: 0
-  },
-  {
-    quote: "রাষ্ট্রে, ধর্মে, সমাজে, তাঁর জীবৎকালে যত আন্দোলন এ-দেশে জেগে উঠেছিলো... তাঁকে বাঁধতে পারে এমন বাঁধন কারো হাতেই তৈরি হলো না।",
-    author: "Buddhadeva Bose",
-    source: "সাহিত্যচর্চা",
-    tags: ["রবীন্দ্রনাথ", "সমাজ", "সাহিত্যদর্শন"],
-    likes: 0
-  },
-  {
-    quote: "বিস্তর বই বেরোচ্ছে আজকাল। বিস্তর বাজে বই বেরোচ্ছে।",
-    author: "Buddhadeva Bose",
-    source: "সাহিত্যচর্চা",
-    tags: ["পাঠক", "বই", "আধুনিক সাহিত্য"],
-    likes: 0
-  },
-  {
-    quote: "বর্তমান জগতে এ-ধারণা প্রায় সর্বব্যাপী যে, সত্য তথ্যেরই নামান্তর মাত্র... দৈনিকপত্রের মতো বিভিন্ন, পরস্পরবিচ্ছিন্ন, তাৎপর্যহীন খবর কুড়োনোকেই আমরা জেনেছি শিক্ষা বলে।",
-    author: "Buddhadeva Bose",
-    source: "সাহিত্যচর্চা",
-    tags: ["শিক্ষা", "সত্য", "সমালোচনা"],
+    quote: "রাজনীতির ভিতরের চেয়ে বাইরেই করিবার মত কাজ ও বলিবার মত কথা আমার অনেক বেশি ছিল ও আছে। আমার অতৃপ্তি আজও বলে আমার করার কাজ ও বলার কথা আজও শেষ হয় নাই।",
+    author: "Unknown",
+    source: "bn.wikiquote.org",
+    tags: ["রাজনীতি", "কর্ম", "অতৃপ্তি"],
     likes: 0
   }
-
 ];
 
 
