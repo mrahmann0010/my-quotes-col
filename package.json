@@ -7,6 +7,9 @@
     "dev": "nodemon server.js",
     "start": "node server"
   },
+  "engines": {
+    "node": "18.x"
+  },
   "author": "Rome",
   "license": "ISC",
   "dependencies": {
