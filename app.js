@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 const cors = require("cors");
 
 const quotesRouter = require("./routers/quotes");
@@ -10,6 +11,10 @@ const globalErrorHandler = require("./controllers/errorHandler");
 const CustomError = require("./utilities/CustomError");
 
 const app = express();
+
+// serve frontend static assets from public/
+app.use(express.static(path.join(__dirname, "public")));
+
 // 1) Middleware
 app.use(express.json());
 
@@ -18,7 +23,7 @@ app.use(
   cors({
     origin: "http://localhost:3000", // allow React dev server
     methods: ["GET", "POST"],
-  })
+  }),
 );
 
 // 2) Adding Routes
@@ -36,7 +41,7 @@ app.use("/api/v1/reviews", reviewsRouter);
 app.use((req, res, next) => {
   const err = new CustomError(
     `Cannot find the url ${req.originalUrl} in the server`,
-    404
+    404,
   );
   console.log("From here");
   next(err);
