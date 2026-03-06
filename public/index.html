@@ -1,12 +1,1133 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <title>Static File</title>
-    <link rel="stylesheet" href="./style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BanglaQuotes API — Documentation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@300;400&family=Playfair+Display+SC:wght@400&family=Hind+Siliguri:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg-primary: #0f0d0a;
+        --bg-secondary: #1a1612;
+        --bg-surface: #231e18;
+        --accent-gold: #c9a84c;
+        --accent-rust: #8b3a2a;
+        --text-primary: #ede0c8;
+        --text-secondary: #a89880;
+        --text-muted: #5c5040;
+        --border: #2e2820;
+        --highlight: #d4a84b18;
+      }
 
-</head>
-<body>
-    <h1>Welcome from the Static File</h1>
-    
-</body>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+        font-family: "EB Garamond", serif;
+        font-size: 17px;
+        line-height: 1.7;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      /* Grain texture */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 100;
+        opacity: 0.04;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      }
+
+      /* Scrollbar */
+      ::-webkit-scrollbar {
+        width: 4px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--bg-primary);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--accent-gold);
+        border-radius: 2px;
+      }
+
+      /* Layout */
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      /* ── HEADER ── */
+      header {
+        border-bottom: 1px solid var(--border);
+        padding: 1.5rem 0;
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: rgba(15, 13, 10, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      .logo {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.25rem;
+        font-weight: 400;
+        color: var(--text-primary);
+        text-decoration: none;
+        letter-spacing: 0.02em;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+      }
+
+      .logo-ornament {
+        color: var(--accent-gold);
+        font-size: 1.1rem;
+      }
+
+      .version-badge {
+        font-family: "DM Mono", monospace;
+        font-size: 0.7rem;
+        color: var(--accent-gold);
+        border: 1px solid var(--accent-gold);
+        padding: 0.15rem 0.5rem;
+        border-radius: 2px;
+        letter-spacing: 0.08em;
+        opacity: 0.8;
+      }
+
+      .header-links {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+      }
+
+      .header-links a {
+        font-family: "DM Mono", monospace;
+        font-size: 0.72rem;
+        color: var(--text-secondary);
+        text-decoration: none;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        transition: color 0.2s;
+      }
+
+      .header-links a:hover {
+        color: var(--accent-gold);
+      }
+
+      /* ── HERO ── */
+      .hero {
+        padding: 7rem 0 5rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          ellipse 70% 60% at 50% 0%,
+          #c9a84c0d,
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+
+      .hero-eyebrow {
+        font-family: "DM Mono", monospace;
+        font-size: 0.7rem;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--accent-gold);
+        margin-bottom: 1.5rem;
+        opacity: 0;
+        animation: fadeUp 0.8s ease 0.1s forwards;
+      }
+
+      .hero-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(3rem, 8vw, 5.5rem);
+        font-weight: 300;
+        line-height: 1.05;
+        color: var(--text-primary);
+        letter-spacing: -0.01em;
+        margin-bottom: 1rem;
+        opacity: 0;
+        animation: fadeUp 0.8s ease 0.25s forwards;
+      }
+
+      .hero-title em {
+        font-style: italic;
+        color: var(--accent-gold);
+      }
+
+      .hero-bengali {
+        font-family: "Hind Siliguri", sans-serif;
+        font-size: 1.1rem;
+        color: var(--text-muted);
+        margin-bottom: 2rem;
+        opacity: 0;
+        animation: fadeUp 0.8s ease 0.4s forwards;
+      }
+
+      .hero-desc {
+        font-size: 1.1rem;
+        color: var(--text-secondary);
+        max-width: 55ch;
+        margin: 0 auto 3rem;
+        font-style: italic;
+        opacity: 0;
+        animation: fadeUp 0.8s ease 0.55s forwards;
+      }
+
+      .hero-base-url {
+        display: inline-block;
+        font-family: "DM Mono", monospace;
+        font-size: 0.85rem;
+        color: var(--text-primary);
+        background: var(--bg-surface);
+        border: 1px solid var(--border);
+        border-left: 3px solid var(--accent-gold);
+        padding: 0.8rem 1.5rem;
+        border-radius: 3px;
+        letter-spacing: 0.02em;
+        opacity: 0;
+        animation: fadeUp 0.8s ease 0.7s forwards;
+      }
+
+      .hero-base-url span {
+        color: var(--accent-gold);
+      }
+
+      /* ── DIVIDER ── */
+      .ink-divider {
+        width: 100%;
+        height: 1px;
+        position: relative;
+        margin: 3rem 0;
+        overflow: visible;
+      }
+
+      .ink-divider::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(
+          to right,
+          transparent,
+          var(--border) 20%,
+          var(--border) 80%,
+          transparent
+        );
+      }
+
+      .ink-divider::after {
+        content: "❧";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: var(--bg-primary);
+        padding: 0 1rem;
+        color: var(--accent-gold);
+        font-size: 1rem;
+        opacity: 0.6;
+      }
+
+      /* ── SECTION TITLE ── */
+      .section-label {
+        font-family: "Playfair Display SC", serif;
+        font-size: 0.7rem;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        margin-bottom: 2.5rem;
+      }
+
+      /* ── STATS ROW ── */
+      .stats-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        background: var(--border);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        overflow: hidden;
+        margin-bottom: 5rem;
+        opacity: 0;
+        animation: fadeUp 0.6s ease 0.9s forwards;
+      }
+
+      .stat {
+        background: var(--bg-surface);
+        padding: 2rem 1.5rem;
+        text-align: center;
+      }
+
+      .stat-value {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 2.5rem;
+        font-weight: 300;
+        color: var(--accent-gold);
+        line-height: 1;
+        margin-bottom: 0.4rem;
+      }
+
+      .stat-label {
+        font-family: "DM Mono", monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+      }
+
+      /* ── ENDPOINTS ── */
+      .endpoints-section {
+        margin-bottom: 5rem;
+      }
+
+      .endpoint-group {
+        margin-bottom: 3rem;
+      }
+
+      .group-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.6rem;
+        font-weight: 400;
+        color: var(--text-primary);
+        margin-bottom: 1.2rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .group-icon {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: var(--highlight);
+        border: 1px solid var(--accent-gold);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+        color: var(--accent-gold);
+        flex-shrink: 0;
+      }
+
+      .endpoint-card {
+        background: var(--bg-surface);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        margin-bottom: 0.75rem;
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s,
+          transform 0.2s;
+        overflow: hidden;
+      }
+
+      .endpoint-card:hover {
+        border-color: var(--accent-gold);
+        box-shadow: 0 4px 24px #c9a84c10;
+        transform: translateY(-1px);
+      }
+
+      .endpoint-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem 1.25rem;
+        cursor: pointer;
+      }
+
+      .method {
+        font-family: "DM Mono", monospace;
+        font-size: 0.65rem;
+        font-weight: 400;
+        letter-spacing: 0.1em;
+        padding: 0.2rem 0.5rem;
+        border-radius: 2px;
+        flex-shrink: 0;
+        min-width: 42px;
+        text-align: center;
+      }
+
+      .method-get {
+        background: #1a3a1a;
+        color: #6fcf6f;
+        border: 1px solid #2d5a2d;
+      }
+      .method-post {
+        background: #1a2a3a;
+        color: #6fa8cf;
+        border: 1px solid #2d4a5a;
+      }
+
+      .endpoint-path {
+        font-family: "DM Mono", monospace;
+        font-size: 0.82rem;
+        color: var(--text-primary);
+        flex: 1;
+      }
+
+      .endpoint-path .param {
+        color: var(--accent-gold);
+      }
+
+      .endpoint-desc {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        font-style: italic;
+        margin-left: auto;
+        text-align: right;
+        font-family: "EB Garamond", serif;
+      }
+
+      .endpoint-body {
+        display: none;
+        padding: 0 1.25rem 1.25rem;
+        border-top: 1px solid var(--border);
+      }
+
+      .endpoint-body.open {
+        display: block;
+      }
+
+      .endpoint-meta {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        padding: 0.75rem 0 1rem;
+      }
+
+      .meta-tag {
+        font-family: "DM Mono", monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.08em;
+        padding: 0.2rem 0.6rem;
+        border: 1px solid var(--border);
+        border-radius: 2px;
+        color: var(--text-muted);
+      }
+
+      .meta-tag.auth {
+        border-color: #8b3a2a55;
+        color: var(--accent-rust);
+      }
+      .meta-tag.cached {
+        border-color: #c9a84c44;
+        color: var(--accent-gold);
+      }
+
+      pre {
+        font-family: "DM Mono", monospace;
+        font-size: 0.75rem;
+        line-height: 1.6;
+        background: var(--bg-secondary);
+        border: 1px solid var(--border);
+        border-left: 2px solid var(--accent-gold);
+        padding: 1rem 1.25rem;
+        border-radius: 3px;
+        overflow-x: auto;
+        color: var(--text-secondary);
+      }
+
+      pre .key {
+        color: #a89880;
+      }
+      pre .str {
+        color: #c9a84c;
+      }
+      pre .num {
+        color: #8db7d4;
+      }
+      pre .bool {
+        color: #e07070;
+      }
+      pre .null {
+        color: #888;
+      }
+
+      .pre-label {
+        font-family: "DM Mono", monospace;
+        font-size: 0.6rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        margin-bottom: 0.4rem;
+      }
+
+      /* ── QUICK START ── */
+      .quickstart {
+        background: var(--bg-surface);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 2.5rem;
+        margin-bottom: 5rem;
+      }
+
+      .quickstart h2 {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.8rem;
+        font-weight: 400;
+        margin-bottom: 0.5rem;
+      }
+
+      .quickstart p {
+        color: var(--text-secondary);
+        margin-bottom: 1.5rem;
+        font-style: italic;
+      }
+
+      .code-tabs {
+        display: flex;
+        gap: 0;
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 0;
+      }
+
+      .code-tab {
+        font-family: "DM Mono", monospace;
+        font-size: 0.68rem;
+        letter-spacing: 0.1em;
+        color: var(--text-muted);
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+        background: none;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        transition: color 0.2s;
+      }
+
+      .code-tab.active {
+        color: var(--accent-gold);
+        border-bottom-color: var(--accent-gold);
+      }
+
+      .code-panel {
+        display: none;
+      }
+      .code-panel.active {
+        display: block;
+      }
+
+      /* ── NOTES ── */
+      .note {
+        display: flex;
+        gap: 0.75rem;
+        background: var(--highlight);
+        border: 1px solid #c9a84c33;
+        border-radius: 3px;
+        padding: 1rem 1.25rem;
+        margin: 1rem 0;
+      }
+
+      .note-icon {
+        color: var(--accent-gold);
+        flex-shrink: 0;
+        font-size: 1rem;
+        margin-top: 0.05rem;
+      }
+
+      .note p {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        font-style: italic;
+      }
+
+      /* ── FOOTER ── */
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 3rem 0;
+        margin-top: 5rem;
+      }
+
+      .footer-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 2rem;
+        flex-wrap: wrap;
+      }
+
+      .footer-brand {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.1rem;
+        font-weight: 400;
+        color: var(--text-secondary);
+      }
+
+      .footer-bengali {
+        font-family: "Hind Siliguri", sans-serif;
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        margin-top: 0.3rem;
+      }
+
+      .footer-links {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        list-style: none;
+      }
+
+      .footer-links a {
+        font-family: "DM Mono", monospace;
+        font-size: 0.7rem;
+        letter-spacing: 0.08em;
+        color: var(--text-muted);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+
+      .footer-links a:hover {
+        color: var(--accent-gold);
+      }
+
+      .footer-copy {
+        font-family: "DM Mono", monospace;
+        font-size: 0.65rem;
+        color: var(--text-muted);
+        letter-spacing: 0.08em;
+      }
+
+      /* ── ANIMATIONS ── */
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(18px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(16px);
+        transition:
+          opacity 0.7s ease,
+          transform 0.7s ease;
+      }
+
+      .reveal.visible {
+        opacity: 1;
+        transform: none;
+      }
+
+      /* ── RESPONSIVE ── */
+      @media (max-width: 640px) {
+        .hero {
+          padding: 4rem 0 3rem;
+        }
+        .header-links {
+          display: none;
+        }
+        .stats-row {
+          grid-template-columns: 1fr;
+        }
+        .endpoint-desc {
+          display: none;
+        }
+        .footer-inner {
+          flex-direction: column;
+        }
+        .quickstart {
+          padding: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header>
+      <div class="container">
+        <div class="header-inner">
+          <a href="#" class="logo">
+            <span class="logo-ornament">❧</span>
+            BanglaQuotes API
+            <span class="version-badge">v1.0</span>
+          </a>
+          <ul class="header-links">
+            <li><a href="#endpoints">Endpoints</a></li>
+            <li><a href="#quickstart">Quick Start</a></li>
+            <li><a href="#notes">Notes</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container">
+        <p class="hero-eyebrow">REST API · JSON · Open Access</p>
+        <h1 class="hero-title">
+          Bengali Literature,<br /><em>Served Elegantly</em>
+        </h1>
+        <p class="hero-bengali">বাংলা সাহিত্যের উদ্ধৃতি ও পর্যালোচনার এপিআই</p>
+        <p class="hero-desc">
+          A curated REST API for Bengali literary quotes, author profiles, book
+          reviews, and community contributions.
+        </p>
+        <div class="hero-base-url">
+          <span>BASE URL —</span>&nbsp; https://my-quotes-col.onrender.com
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <!-- STATS -->
+      <div class="stats-row">
+        <div class="stat">
+          <div class="stat-value">∞</div>
+          <div class="stat-label">Quotes</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">0</div>
+          <div class="stat-label">Rate Limit</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">JSON</div>
+          <div class="stat-label">Format</div>
+        </div>
+      </div>
+
+      <div class="ink-divider"></div>
+
+      <!-- ENDPOINTS -->
+      <section id="endpoints" class="endpoints-section reveal">
+        <p class="section-label">API Reference</p>
+
+        <!-- QUOTES -->
+        <div class="endpoint-group">
+          <h2 class="group-title">
+            <span class="group-icon">✦</span>
+            Quotes
+          </h2>
+
+          <!-- GET /quotes -->
+          <div class="endpoint-card" onclick="toggle(this)">
+            <div class="endpoint-header">
+              <span class="method method-get">GET</span>
+              <span class="endpoint-path">/quotes</span>
+              <span class="endpoint-desc">All quotes</span>
+            </div>
+            <div class="endpoint-body">
+              <div class="endpoint-meta">
+                <span class="meta-tag">Public</span>
+                <span class="meta-tag cached">ISR · 60s</span>
+              </div>
+              <p class="pre-label">Response · 200 OK</p>
+              <pre>[
+  {
+    <span class="key">"id"</span>: <span class="num">1</span>,
+    <span class="key">"text"</span>: <span class="str">"যতক্ষণ দেহে আছে প্রাণ..."</span>,
+    <span class="key">"author"</span>: <span class="str">"Rabindranath Tagore"</span>,
+    <span class="key">"translation"</span>: <span class="str">"As long as there is life in the body..."</span>,
+    <span class="key">"likes"</span>: <span class="num">142</span>,
+    <span class="key">"source"</span>: <span class="str">"Gitanjali"</span>
+  }
+]</pre>
+            </div>
+          </div>
+
+          <!-- GET /quotes/random -->
+          <div class="endpoint-card" onclick="toggle(this)">
+            <div class="endpoint-header">
+              <span class="method method-get">GET</span>
+              <span class="endpoint-path">/quotes/random</span>
+              <span class="endpoint-desc">Random quote</span>
+            </div>
+            <div class="endpoint-body">
+              <div class="endpoint-meta">
+                <span class="meta-tag">Public</span>
+                <span class="meta-tag">No Cache</span>
+              </div>
+              <p class="pre-label">Response · 200 OK</p>
+              <pre>{
+  <span class="key">"id"</span>: <span class="num">37</span>,
+  <span class="key">"text"</span>: <span class="str">"আলো আমার আলো ওগো..."</span>,
+  <span class="key">"author"</span>: <span class="str">"Rabindranath Tagore"</span>,
+  <span class="key">"translation"</span>: <span class="str">"Light, my light, the world-filling light..."</span>
+}</pre>
+            </div>
+          </div>
+
+          <!-- GET /quotes/:id -->
+          <div class="endpoint-card" onclick="toggle(this)">
+            <div class="endpoint-header">
+              <span class="method method-get">GET</span>
+              <span class="endpoint-path"
+                >/quotes/<span class="param">:id</span></span
+              >
+              <span class="endpoint-desc">Single quote</span>
+            </div>
+            <div class="endpoint-body">
+              <div class="endpoint-meta">
+                <span class="meta-tag">Public</span>
+              </div>
+              <p class="pre-label">Path Parameters</p>
+              <pre><span class="key">id</span>  — Integer · Quote identifier</pre>
+              <p class="pre-label" style="margin-top: 1rem">
+                Response · 200 OK
+              </p>
+              <pre>{
+  <span class="key">"id"</span>: <span class="num">5</span>,
+  <span class="key">"text"</span>: <span class="str">"বিপদে মোরে রক্ষা করো..."</span>,
+  <span class="key">"author"</span>: <span class="str">"Rabindranath Tagore"</span>,
+  <span class="key">"likes"</span>: <span class="num">89</span>
+}</pre>
+            </div>
+          </div>
+
+          <!-- POST /quotes -->
+          <div class="endpoint-card" onclick="toggle(this)">
+            <div class="endpoint-header">
+              <span class="method method-post">POST</span>
+              <span class="endpoint-path">/quotes</span>
+              <span class="endpoint-desc">Upload a quote</span>
+            </div>
+            <div class="endpoint-body">
+              <div class="endpoint-meta">
+                <span class="meta-tag">Public</span>
+                <span class="meta-tag">Content-Type: application/json</span>
+              </div>
+              <p class="pre-label">Request Body</p>
+              <pre>{
+  <span class="key">"text"</span>: <span class="str">"string · required"</span>,
+  <span class="key">"author"</span>: <span class="str">"string · required"</span>,
+  <span class="key">"translation"</span>: <span class="str">"string · optional"</span>,
+  <span class="key">"source"</span>: <span class="str">"string · optional"</span>,
+  <span class="key">"uploadedBy"</span>: <span class="str">"string · optional"</span>
+}</pre>
+              <p class="pre-label" style="margin-top: 1rem">
+                Response · 201 Created
+              </p>
+              <pre>{ <span class="key">"id"</span>: <span class="num">204</span>, <span class="key">"message"</span>: <span class="str">"Quote created successfully"</span> }</pre>
+            </div>
+          </div>
+        </div>
+
+        <!-- AUTHORS -->
+        <div class="endpoint-group reveal">
+          <h2 class="group-title">
+            <span class="group-icon">✦</span>
+            Authors
+          </h2>
+
+          <div class="endpoint-card" onclick="toggle(this)">
+            <div class="endpoint-header">
+              <span class="method method-get">GET</span>
+              <span class="endpoint-path">/authors</span>
+              <span class="endpoint-desc">All authors</span>
+            </div>
+            <div class="endpoint-body">
+              <div class="endpoint-meta">
+                <span class="meta-tag">Public</span>
+                <span class="meta-tag cached">ISR · 60s</span>
+              </div>
+              <p class="pre-label">Response · 200 OK</p>
+              <pre>[
+  {
+    <span class="key">"id"</span>: <span class="str">"rabindranath-tagore"</span>,
+    <span class="key">"name"</span>: <span class="str">"Rabindranath Tagore"</span>,
+    <span class="key">"bengaliName"</span>: <span class="str">"রবীন্দ্রনাথ ঠাকুর"</span>,
+    <span class="key">"quoteCount"</span>: <span class="num">48</span>
+  }
+]</pre>
+            </div>
+          </div>
+
+          <div class="endpoint-card" onclick="toggle(this)">
+            <div class="endpoint-header">
+              <span class="method method-get">GET</span>
+              <span class="endpoint-path"
+                >/authors/<span class="param">:authorID</span>/quotes</span
+              >
+              <span class="endpoint-desc">Quotes by author</span>
+            </div>
+            <div class="endpoint-body">
+              <div class="endpoint-meta">
+                <span class="meta-tag">Public</span>
+              </div>
+              <p class="pre-label">Path Parameters</p>
+              <pre><span class="key">authorID</span>  — String · Author slug (e.g. <span class="str">"rabindranath-tagore"</span>)</pre>
+            </div>
+          </div>
+        </div>
+
+        <!-- REVIEWS -->
+        <div class="endpoint-group reveal">
+          <h2 class="group-title">
+            <span class="group-icon">✦</span>
+            Book Reviews
+          </h2>
+
+          <div class="endpoint-card" onclick="toggle(this)">
+            <div class="endpoint-header">
+              <span class="method method-get">GET</span>
+              <span class="endpoint-path">/reviews</span>
+              <span class="endpoint-desc">All reviews</span>
+            </div>
+            <div class="endpoint-body">
+              <div class="endpoint-meta">
+                <span class="meta-tag">Public</span>
+                <span class="meta-tag cached">ISR · 60s</span>
+              </div>
+              <p class="pre-label">Response · 200 OK</p>
+              <pre>[
+  {
+    <span class="key">"id"</span>: <span class="num">1</span>,
+    <span class="key">"title"</span>: <span class="str">"Ghare Baire"</span>,
+    <span class="key">"author"</span>: <span class="str">"Rabindranath Tagore"</span>,
+    <span class="key">"reviewer"</span>: <span class="str">"Arif Hossain"</span>,
+    <span class="key">"rating"</span>: <span class="num">5</span>,
+    <span class="key">"body"</span>: <span class="str">"A masterpiece of conflict and conscience..."</span>
+  }
+]</pre>
+            </div>
+          </div>
+
+          <div class="endpoint-card" onclick="toggle(this)">
+            <div class="endpoint-header">
+              <span class="method method-get">GET</span>
+              <span class="endpoint-path"
+                >/reviews/<span class="param">:reviewID</span></span
+              >
+              <span class="endpoint-desc">Single review</span>
+            </div>
+            <div class="endpoint-body">
+              <div class="endpoint-meta">
+                <span class="meta-tag">Public</span>
+              </div>
+              <p class="pre-label">Path Parameters</p>
+              <pre><span class="key">reviewID</span>  — Integer · Review identifier</pre>
+            </div>
+          </div>
+        </div>
+
+        <!-- COMMUNITY -->
+        <div class="endpoint-group reveal">
+          <h2 class="group-title">
+            <span class="group-icon">✦</span>
+            Community
+          </h2>
+
+          <div class="endpoint-card" onclick="toggle(this)">
+            <div class="endpoint-header">
+              <span class="method method-get">GET</span>
+              <span class="endpoint-path">/uploads</span>
+              <span class="endpoint-desc">Community uploads</span>
+            </div>
+            <div class="endpoint-body">
+              <div class="endpoint-meta">
+                <span class="meta-tag">Public</span>
+              </div>
+              <p class="pre-label">Response · 200 OK</p>
+              <pre>[
+  {
+    <span class="key">"id"</span>: <span class="num">12</span>,
+    <span class="key">"text"</span>: <span class="str">"..."</span>,
+    <span class="key">"uploadedBy"</span>: <span class="str">"sadia_reads"</span>,
+    <span class="key">"createdAt"</span>: <span class="str">"2024-03-15T10:30:00Z"</span>
+  }
+]</pre>
+            </div>
+          </div>
+
+          <div class="endpoint-card" onclick="toggle(this)">
+            <div class="endpoint-header">
+              <span class="method method-get">GET</span>
+              <span class="endpoint-path"
+                >/uploads/<span class="param">:uploaderName</span></span
+              >
+              <span class="endpoint-desc">Quotes by uploader</span>
+            </div>
+            <div class="endpoint-body">
+              <div class="endpoint-meta">
+                <span class="meta-tag">Public</span>
+              </div>
+              <p class="pre-label">Path Parameters</p>
+              <pre><span class="key">uploaderName</span>  — String · Community username</pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="ink-divider"></div>
+
+      <!-- QUICK START -->
+      <section id="quickstart" class="quickstart reveal">
+        <h2>Quick Start</h2>
+        <p>Fetch your first quote in seconds — no API key required.</p>
+        <div class="code-tabs">
+          <button class="code-tab active" onclick="switchTab(event, 'fetch')">
+            fetch
+          </button>
+          <button class="code-tab" onclick="switchTab(event, 'curl')">
+            curl
+          </button>
+          <button class="code-tab" onclick="switchTab(event, 'axios')">
+            axios
+          </button>
+        </div>
+
+        <div id="tab-fetch" class="code-panel active">
+          <pre><span class="key">const</span> res = <span class="key">await</span> fetch(
+  <span class="str">'https://my-quotes-col.onrender.com/quotes/random'</span>
+);
+<span class="key">const</span> quote = <span class="key">await</span> res.json();
+console.log(quote.text); <span class="null">// বাংলা উদ্ধৃতি</span></pre>
+        </div>
+
+        <div id="tab-curl" class="code-panel">
+          <pre>curl -X GET \
+  https://my-quotes-col.onrender.com/quotes/random \
+  -H <span class="str">"Accept: application/json"</span></pre>
+        </div>
+
+        <div id="tab-axios" class="code-panel">
+          <pre><span class="key">import</span> axios <span class="key">from</span> <span class="str">'axios'</span>;
+
+<span class="key">const</span> { data } = <span class="key">await</span> axios.get(
+  <span class="str">'https://my-quotes-col.onrender.com/quotes/random'</span>
+);
+console.log(data.author); <span class="null">// Rabindranath Tagore</span></pre>
+        </div>
+      </section>
+
+      <div class="ink-divider"></div>
+
+      <!-- NOTES -->
+      <section id="notes" class="reveal" style="margin-bottom: 4rem">
+        <p class="section-label">Notes & Conventions</p>
+
+        <div class="note">
+          <span class="note-icon">◈</span>
+          <p>
+            All responses are <strong>JSON</strong>. Bengali text is returned in
+            <strong>UTF-8</strong> Unicode — no additional encoding is required.
+          </p>
+        </div>
+
+        <div class="note">
+          <span class="note-icon">◈</span>
+          <p>
+            The API is hosted on Render's free tier. Cold starts may cause the
+            first request to take <strong>10–30 seconds</strong> after a period
+            of inactivity. Subsequent requests are fast.
+          </p>
+        </div>
+
+        <div class="note">
+          <span class="note-icon">◈</span>
+          <p>
+            There is currently <strong>no authentication</strong> required for
+            read endpoints. Write endpoints (<code>POST /quotes</code>) are open
+            for community submissions.
+          </p>
+        </div>
+
+        <div class="note">
+          <span class="note-icon">◈</span>
+          <p>
+            The frontend at <strong>BanglaQuotes</strong> proxies all requests
+            through <code>/api/*</code> rewrites to this base URL, so both
+            environments are always in sync.
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="container">
+        <div class="footer-inner">
+          <div>
+            <div class="footer-brand">❧ BanglaQuotes API</div>
+            <div class="footer-bengali">বাংলা সাহিত্যের সেবায়</div>
+          </div>
+          <ul class="footer-links">
+            <li><a href="#endpoints">Endpoints</a></li>
+            <li><a href="#quickstart">Quick Start</a></li>
+            <li><a href="#notes">Notes</a></li>
+          </ul>
+          <div class="footer-copy">Open · Free · Bengali</div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Toggle endpoint accordion
+      function toggle(card) {
+        const body = card.querySelector(".endpoint-body");
+        body.classList.toggle("open");
+      }
+
+      // Code tab switcher
+      function switchTab(e, id) {
+        document
+          .querySelectorAll(".code-tab")
+          .forEach((t) => t.classList.remove("active"));
+        document
+          .querySelectorAll(".code-panel")
+          .forEach((p) => p.classList.remove("active"));
+        e.target.classList.add("active");
+        document.getElementById("tab-" + id).classList.add("active");
+      }
+
+      // Scroll reveal
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("visible");
+            }
+          });
+        },
+        { threshold: 0.1 },
+      );
+
+      document
+        .querySelectorAll(".reveal")
+        .forEach((el) => observer.observe(el));
+    </script>
+  </body>
 </html>
