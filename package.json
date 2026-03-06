@@ -8,7 +8,7 @@
     "start": "node server"
   },
   "engines": {
-    "node": "18.x"
+    "node": "24.x"
   },
   "author": "Rome",
   "license": "ISC",
