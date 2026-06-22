@@ -13,7 +13,7 @@ exports.getQuotesByUploaderName = asyncHandler(async (req, res, next) => {
 
   const quotesByUploader = await QuotesByOther.find({
     uploadedBy: uploaderName,
-  }).sort({ createdAt: -1 });
+  }).sort({ createdAt: -1 }).lean();
 
   if (quotesByUploader.length === 0) {
     return res
@@ -84,7 +84,7 @@ exports.createUploader = asyncHandler(async (req, res, next) => {
   }
 
   // Check if user already exists
-  const existingUser = await Uploader.findOne({ email: email.toLowerCase() });
+  const existingUser = await Uploader.findOne({ email: email.toLowerCase() }).lean();
   if (existingUser) {
     return res.status(409).json({
       status: "fail",
@@ -108,7 +108,7 @@ exports.createUploader = asyncHandler(async (req, res, next) => {
 });
 
 exports.getAllUploaders = asyncHandler(async (req, res, next) => {
-  const uploaders = await Uploader.find();
+  const uploaders = await Uploader.find().lean();
   console.log(uploaders);
   if (!uploaders || uploaders.length === 0) {
     return res.status(404).json({
@@ -127,7 +127,7 @@ exports.getAllUploaders = asyncHandler(async (req, res, next) => {
 // Get All Quotes Uploaded By Others
 // Get All Quotes
 exports.getAllQuotes = asyncHandler(async (req, res, next) => {
-  const quotes = await QuotesByOther.find().sort({ createdAt: -1 });
+  const quotes = await QuotesByOther.find().sort({ createdAt: -1 }).lean();
 
   if (!quotes || quotes.length === 0) {
     return res.status(404).json({

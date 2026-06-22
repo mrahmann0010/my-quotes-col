@@ -30,7 +30,7 @@ exports.signUp = async (req, res, next)=>{
         };
 
         // 2)) Check if user already exists
-        const existingUser = await User.findOne({email});
+        const existingUser = await User.findOne({email}).lean();
         if(existingUser){
             return res.status(409).json({
                 status:'fail',

@@ -3,7 +3,7 @@ const CustomError = require('../utilities/CustomError');
 const asyncHandler = require('../utilities/asyncHandler');
 
 exports.getAllQuotes = asyncHandler( async (req, res, next) => {
-        const quotes = await Quotes.find(req.query);
+        const quotes = await Quotes.find(req.query).lean();
         console.log(req.query)
         res.status(200).json({
             status:'success',
@@ -16,7 +16,7 @@ exports.getAllQuotes = asyncHandler( async (req, res, next) => {
 
 exports.getASingleQuote = asyncHandler (async (req, res, next) =>{
         const quoteId = req.params.id;
-        const quote = await Quotes.findById(quoteId);
+        const quote = await Quotes.findById(quoteId).lean();
         if(!quote) {
             const error = new CustomError(`Quote cannot be found by ID`, 404)
             return next(error);
@@ -31,7 +31,7 @@ exports.getASingleQuote = asyncHandler (async (req, res, next) =>{
 
 exports.getAllQuotesByAnAuthorID = asyncHandler (async (req, res, next)=>{
     const authorID = req.params.authorID;
-        const quotesByAuthor = await Quotes.find({authorID:authorID});
+        const quotesByAuthor = await Quotes.find({authorID:authorID}).lean();
         if(!quotesByAuthor.length) {
             const error = new CustomError(`Quote cannot be found by AuthorID`, 404)
             return next(error);

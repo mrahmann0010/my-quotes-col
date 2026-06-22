@@ -45,7 +45,7 @@ exports.addReview = async (req, res) => {
 // Get all reviews
 exports.getAllReviews = async (req, res) => {
   try {
-    const reviews = await BookReview.find(); // Get all reviews from the database
+    const reviews = await BookReview.find().lean(); // Get all reviews from the database
     res.status(200).json(reviews);
   } catch (error) {
     console.error("Error getting reviews:", error);
@@ -60,7 +60,7 @@ exports.getAllReviews = async (req, res) => {
 exports.getReviewById = async (req, res) => {
   try {
     const reviewId = req.params.id; // Get the ID from the URL params
-    const review = await BookReview.findById(reviewId); // Find the review by ID
+    const review = await BookReview.findById(reviewId).lean(); // Find the review by ID
 
     if (!review) {
       return res.status(404).json({ message: "Review not found" });
@@ -105,7 +105,7 @@ exports.updateReview = async (req, res) => {
         bookImage,
       },
       { new: true } // `new: true` returns the updated document
-    );
+    ).lean();
 
     if (!updatedReview) {
       return res.status(404).json({ message: "Review not found" });
@@ -130,7 +130,7 @@ exports.deleteReview = async (req, res) => {
     const reviewId = req.params.id;
 
     // Find and delete the review by ID
-    const deletedReview = await BookReview.findByIdAndDelete(reviewId);
+    const deletedReview = await BookReview.findByIdAndDelete(reviewId).lean();
 
     if (!deletedReview) {
       return res.status(404).json({ message: "Review not found" });
