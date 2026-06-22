@@ -3,7 +3,7 @@ const asyncHandler = require('../utilities/asyncHandler');
 const CustomError = require('../utilities/CustomError');
 
 exports.getAllAuthors = asyncHandler(async (req, res, next) => {
-        const authors = await Authors.find();
+        const authors = await Authors.find().lean();
         res.status(200).json({
             status:'success',
             results:authors.length,
@@ -15,7 +15,7 @@ exports.getAllAuthors = asyncHandler(async (req, res, next) => {
 
 exports.getASingleAuthor = asyncHandler(async (req, res, next) =>{
         const authorId = req.params.authorID;
-        const author = await Authors.findOne({ authorID: authorId });
+        const author = await Authors.findOne({ authorID: authorId }).lean();
         if(!author) {
             const error = new CustomError('Author cannot be found by AuthorID', 404)
             return next(error);
@@ -50,7 +50,7 @@ exports.updateAnAuthor = asyncHandler(async (req, res, next)=>{
         {authorID:prevauthorID},
         {authorID: newAuthorID},
         {new:true},
-    )
+    ).lean()
 
     if (!updatedAuthor) {
         const error = new CustomError('Author not found', 404);
