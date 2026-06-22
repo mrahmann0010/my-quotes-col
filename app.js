@@ -1,5 +1,4 @@
 const express = require("express");
-const path = require("path");
 const cors = require("cors");
 
 const quotesRouter = require("./routers/quotes");
@@ -11,10 +10,6 @@ const globalErrorHandler = require("./controllers/errorHandler");
 const CustomError = require("./utilities/CustomError");
 
 const app = express();
-
-// serve frontend static assets from public/
-app.use(express.static(path.join(__dirname, "public")));
-
 // 1) Middleware
 app.use(express.json());
 
